@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; }
+  ::selection { background: #E4B65B; color: #1A1A1A; }
+  @keyframes pulseWa { 0%,100% { box-shadow:0 8px 24px -6px #1faf5466, 0 0 0 0 #25D36655; } 50% { box-shadow:0 8px 24px -6px #1faf5488, 0 0 0 12px #25D36600; } }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+</style>
+</helmet>
+
+<div style="background:#FBFAF8; color:#1A1A1A; font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; min-height:100vh; overflow-x:hidden;">
+
+  <!-- ============ NAV ============ -->
+  <header style="position:sticky; top:0; z-index:50; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); background:rgba(251,250,248,0.78); border-bottom:1px solid #E7E3DA;">
+    <nav style="max-width:1180px; margin:0 auto; padding:0 28px; height:68px; display:flex; align-items:center; justify-content:space-between;">
+      <a href="#top" style="display:flex; align-items:center; text-decoration:none;">
+        <img src="assets/logo-ouro-minas.png" alt="Ouro Minas" style="height:48px; width:auto; display:block;">
+      </a>
+      <div style="display:flex; align-items:center; gap:32px;">
+        <a href="#diferenciais" style="color:#6B6B72; text-decoration:none; font-size:14px; font-weight:500;" style-hover="color:#1A1A1A; text-decoration:none; font-size:14px; font-weight:500;">Diferenciais</a>
+        <a href="#frota" style="color:#6B6B72; text-decoration:none; font-size:14px; font-weight:500;" style-hover="color:#1A1A1A; text-decoration:none; font-size:14px; font-weight:500;">Frota</a>
+        <a href="#como-funciona" style="color:#6B6B72; text-decoration:none; font-size:14px; font-weight:500;" style-hover="color:#1A1A1A; text-decoration:none; font-size:14px; font-weight:500;">Como funciona</a>
+        <a href="#faq" style="color:#6B6B72; text-decoration:none; font-size:14px; font-weight:500;" style-hover="color:#1A1A1A; text-decoration:none; font-size:14px; font-weight:500;">FAQ</a>
+        <a href="#contato" style="color:#6B6B72; text-decoration:none; font-size:14px; font-weight:500;" style-hover="color:#1A1A1A; text-decoration:none; font-size:14px; font-weight:500;">Contato</a>
+      </div>
+      <a href="{{ whatsappHref }}" target="_blank" rel="noopener" style="background:#E4B65B; color:#1A1A1A; text-decoration:none; font-size:13.5px; font-weight:600; padding:9px 18px; border-radius:8px; transition:all .2s;" style-hover="background:#eec272; color:#1A1A1A; text-decoration:none; font-size:13.5px; font-weight:600; padding:9px 18px; border-radius:8px; box-shadow:0 6px 18px -6px #E4B65Baa;">Solicitar Cotação</a>
+    </nav>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" style="position:relative; overflow:hidden; border-bottom:1px solid #EDEAE2;">
+    <sc-if value="{{ heroGrid }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute; inset:0; background-image:linear-gradient(#0000000a 1px,transparent 1px),linear-gradient(90deg,#0000000a 1px,transparent 1px); background-size:54px 54px; mask-image:radial-gradient(ellipse 90% 70% at 30% 0%,#000 30%,transparent 78%); -webkit-mask-image:radial-gradient(ellipse 90% 70% at 30% 0%,#000 30%,transparent 78%);"></div>
+    </sc-if>
+    <div style="position:absolute; top:-200px; left:18%; width:760px; height:420px; background:radial-gradient(ellipse at center,#E4B65B2e,transparent 70%); pointer-events:none;"></div>
+
+    <div style="position:relative; max-width:1180px; margin:0 auto; padding:96px 28px 88px; display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;">
+      <div>
+        <div style="display:inline-flex; align-items:center; gap:8px; border:1px solid #E4D7B4; background:#fff; border-radius:999px; padding:6px 14px; font-size:12.5px; color:#7a6a44; margin-bottom:26px; box-shadow:0 1px 2px #0000000a;">
+          <span style="width:6px; height:6px; border-radius:50%; background:#E4B65B; box-shadow:0 0 8px #E4B65B;"></span>
+          Terceirização de frotas corporativas
+        </div>
+        <h1 style="font-family:'Inter Tight',sans-serif; font-weight:700; font-size:58px; line-height:1.04; letter-spacing:-0.03em; margin:0 0 22px; color:#1A1A1A;">
+          Gestão de Frotas <span style="color:#B07D2A;">Inteligente</span> para Empresas
+        </h1>
+        <p style="font-size:18.5px; line-height:1.6; color:#6B6B72; max-width:540px; margin:0 0 34px; font-weight:400;">
+          Reduza custos e elimine preocupações com manutenção. Conte com uma frota sempre pronta para manter sua operação em movimento.
+        </p>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="#contato" style="background:#E4B65B; color:#1A1A1A; text-decoration:none; font-weight:600; font-size:15.5px; padding:14px 26px; border-radius:10px; box-shadow:0 1px 2px #0000000f; transition:all .22s;" style-hover="background:#eec272; color:#1A1A1A; text-decoration:none; font-weight:600; font-size:15.5px; padding:14px 26px; border-radius:10px; transform:translateY(-1px); box-shadow:0 10px 30px -8px #E4B65B88;">Solicitar Cotação</a>
+          <a href="{{ whatsappHref }}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:9px; background:#fff; border:1px solid #D6D1C6; color:#1A1A1A; text-decoration:none; font-weight:600; font-size:15.5px; padding:14px 24px; border-radius:10px; transition:all .2s;" style-hover="display:inline-flex; align-items:center; gap:9px; background:#fff; border:1px solid #25D366; color:#128C40; text-decoration:none; font-weight:600; font-size:15.5px; padding:14px 24px; border-radius:10px;">
+            <span style="display:inline-flex; width:18px; height:18px; color:#25D366;">{{ waIcon }}</span> WhatsApp
+          </a>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <div style="position:relative; border-radius:18px; overflow:hidden; border:1px solid #E7E3DA; box-shadow:0 30px 60px -30px #00000040; aspect-ratio:4/3.2; background:repeating-linear-gradient(45deg,#F1EFE9,#F1EFE9 16px,#EAE7DF 16px,#EAE7DF 32px); display:flex; align-items:center; justify-content:center;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:#9c968a; letter-spacing:0.04em; padding:9px 13px; border:1px dashed #C9C3B5; border-radius:6px; background:#ffffffcc;">[ imagem / vídeo institucional da frota ]</span>
+        </div>
+        <div style="position:absolute; bottom:-18px; left:-18px; background:#18181B; color:#fff; border-radius:14px; padding:16px 20px; box-shadow:0 18px 40px -16px #00000055;">
+          <div style="font-family:'Inter Tight',sans-serif; font-weight:700; font-size:26px; letter-spacing:-0.02em; color:#E4B65B; line-height:1;">24h</div>
+          <div style="font-size:12px; color:#A1A1AA; margin-top:4px;">Assistência sempre ativa</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAIXA INSTITUCIONAL ============ -->
+  <section style="background:#18181B;">
+    <div style="max-width:1180px; margin:0 auto; padding:30px 28px; display:flex; align-items:center; justify-content:center; gap:16px; text-align:center; flex-wrap:wrap;">
+      <span style="display:inline-flex; width:20px; height:20px; color:#E4B65B; flex:none;">{{ pinIcon }}</span>
+      <p style="font-size:17px; color:#EDEDED; margin:0; font-weight:500; line-height:1.5; max-width:820px;">Atendemos empresas em <span style="color:#E4B65B;">todo o Brasil</span> com soluções completas em gestão de frotas e locação de veículos corporativos.</p>
+    </div>
+  </section>
+
+  <!-- ============ POR QUE ESCOLHER (DIFERENCIAIS) ============ -->
+  <section id="diferenciais" style="max-width:1180px; margin:0 auto; padding:96px 28px;">
+    <div style="text-align:center; max-width:640px; margin:0 auto 56px;">
+      <p style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#B07D2A; margin:0 0 14px; font-weight:600;">Diferenciais</p>
+      <h2 style="font-family:'Inter Tight',sans-serif; font-weight:700; font-size:40px; letter-spacing:-0.025em; margin:0 0 14px; line-height:1.1;">Por que escolher a Ouro Minas?</h2>
+      <p style="font-size:16.5px; color:#6B6B72; margin:0; line-height:1.6;">Estrutura completa para que sua empresa rode sem preocupações com a frota.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+      <sc-for list="{{ diferenciais }}" as="d" hint-placeholder-count="6">
+        <div style="background:#fff; border:1px solid #E7E3DA; border-radius:16px; padding:30px; box-shadow:0 1px 3px #0000000a; transition:all .2s;" style-hover="background:#fff; border:1px solid #E4B65B; border-radius:16px; padding:30px; box-shadow:0 12px 30px -18px #E4B65B66;">
+          <div style="width:44px; height:44px; border-radius:11px; background:#E4B65B1f; display:flex; align-items:center; justify-content:center; margin-bottom:18px; color:#B07D2A;">
+            <span style="display:inline-flex; width:22px; height:22px;">{{ d.icon }}</span>
+          </div>
+          <h3 style="font-family:'Inter Tight',sans-serif; font-weight:600; font-size:18px; margin:0 0 10px; letter-spacing:-0.01em;">{{ d.title }}</h3>
+          <p style="font-size:14.5px; color:#6B6B72; line-height:1.6; margin:0;">{{ d.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ NOSSA FROTA ============ -->
+  <section id="frota" style="background:#F4F2ED; border-top:1px solid #EAE7DF; border-bottom:1px solid #EAE7DF;">
+    <div style="max-width:1180px; margin:0 auto; padding:96px 28px;">
+      <div style="margin-bottom:48px; max-width:640px;">
+        <p style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#B07D2A; margin:0 0 14px; font-weight:600;">Nossa frota</p>
+        <h2 style="font-family:'Inter Tight',sans-serif; font-weight:700; font-size:40px; letter-spacing:-0.025em; margin:0 0 14px; line-height:1.1;">Modelos para cada tipo de operação.</h2>
+        <p style="font-size:16.5px; color:#6B6B72; margin:0; line-height:1.6;">Frota constantemente renovada. Veja alguns dos modelos e versões disponíveis para terceirização.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px;">
+        <sc-for list="{{ fleet }}" as="car" hint-placeholder-count="8">
+          <div style="background:#fff; border:1px solid #E7E3DA; border-radius:16px; overflow:hidden; box-shadow:0 1px 3px #0000000a; transition:all .2s; display:flex; flex-direction:column;" style-hover="background:#fff; border:1px solid #E4B65B; border-radius:16px; overflow:hidden; box-shadow:0 14px 32px -18px #E4B65B66; transform:translateY(-2px); display:flex; flex-direction:column;">
+            <div style="aspect-ratio:16/11; background:repeating-linear-gradient(45deg,#F3F1EB,#F3F1EB 11px,#ECE9E1 11px,#ECE9E1 22px); display:flex; align-items:center; justify-content:center; border-bottom:1px solid #EDEAE2; position:relative;">
+              <span style="position:absolute; top:12px; left:12px; font-size:10.5px; font-weight:600; color:#9a6c20; background:#fff; border:1px solid #E4D7B4; padding:3px 9px; border-radius:999px;">{{ car.cat }}</span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#a8a296;">[ {{ car.name }} ]</span>
+            </div>
+            <div style="padding:18px 20px 22px; display:flex; flex-direction:column; flex:1;">
+              <h3 style="font-family:'Inter Tight',sans-serif; font-weight:700; font-size:17px; margin:0 0 4px; letter-spacing:-0.01em;">{{ car.name }}</h3>
+              <p style="font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; color:#B07D2A; margin:0 0 14px; font-weight:600;">{{ car.countLabel }}</p>
+              <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:7px;">
+                <sc-for list="{{ car.versions }}" as="ver" hint-placeholder-count="2">
+                  <li style="display:flex; align-items:flex-start; gap:8px; font-size:13px; color:#3f3f46; line-height:1.4;"><span style="color:#E4B65B; margin-top:1px;">—</span> {{ ver }}</li>
+                </sc-for>
+              </ul>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="text-align:center; font-size:14px; color:#9c968a; margin:36px 0 0;">Não encontrou o modelo ideal? <a href="{{ whatsappHref }}" target="_blank" rel="noopener" style="color:#B07D2A; font-weight:600; text-decoration:none;">Fale conosco</a> — montamos a frota sob medida.</p>
+    </div>
+  </section>
+
+  <!-- ============ COMO FUNCIONA ============ -->
+  <section id="como-funciona" style="max-width:1180px; margin:0 auto; padding:96px 28px;">
+    <div style="text-align:center; max-width:640px; margin:0 auto 56px;">
+      <p style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#B07D2A; margin:0 0 14px; font-weight:600;">Como funciona</p>
+      <h2 style="font-family:'Inter Tight',sans-serif; font-weight:700; font-size:40px; letter-spacing:-0.025em; margin:0 0 14px; line-height:1.1;">Quatro passos até sua frota rodar.</h2>
+      <p style="font-size:16.5px; color:#6B6B72; margin:0; line-height:1.6;">Um processo simples, transparente e sem burocracia.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:24px;">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+        <div style="position:relative; background:#fff; border:1px solid #E7E3DA; border-radius:16px; padding:30px 26px; box-shadow:0 1px 3px #0000000a;">
+          <div style="font-family:'Inter Tight',sans-serif; font-weight:700; font-size:15px; width:40px; height:40px; border-radius:50%; background:#18181B; color:#E4B65B; display:flex; align-items:center; justify-content:center; margin-bottom:20px;">{{ s.n }}</div>
+          <p style="font-size:15.5px; color:#27272A; line-height:1.5; margin:0; font-weight:500;">{{ s.text }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ POR QUE TERCEIRIZAR (COMPARATIVO) ============ -->
+  <section style="background:#18181B; color:#FDFDFD;">
+    <div style="max-width:1180px; margin:0 auto; padding:96px 28px;">
+      <div style="text-align:center; max-width:640px; margin:0 auto 56px;">
+        <p style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#E4B65B; margin:0 0 14px; font-weight:600;">Comparativo</p>
+        <h2 style="font-family:'Inter Tight',sans-serif; font-weight:700; font-size:40px; letter-spacing:-0.025em; margin:0; line-height:1.1; color:#FDFDFD;">Por que terceirizar sua frota?</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:900px; margin:0 auto;">
+        <div style="background:#1E1E22; border:1px solid #2C2C30; border-radius:18px; padding:34px 30px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:24px;">
+            <span style="display:inline-flex; width:22px; height:22px; color:#8a8a92;">{{ xIcon }}</span>
+            <h3 style="font-family:'Inter Tight',sans-serif; font-weight:600; font-size:20px; margin:0; color:#D4D4D8;">Frota Própria</h3>
+          </div>
+          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:15px;">
+            <sc-for list="{{ ownFleet }}" as="item" hint-placeholder-count="5">
+              <li style="display:flex; align-items:flex-start; gap:11px; font-size:15px; color:#A1A1AA; line-height:1.45;"><span style="color:#6f6f76; flex:none; margin-top:1px;">✕</span> {{ item }}</li>
+            </sc-for>
+          </ul>
+        </div>
+        <div style="background:linear-gradient(#23200f,#1c1a10); border:1px solid #E4B65B66; border-radius:18px; padding:34px 30px; box-shadow:0 20px 50px -24px #E4B65B55;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:24px;">
+            <img src="assets/icone.png" alt="" style="height:24px; width:auto;">
+            <h3 style="font-family:'Inter Tight',sans-serif; font-weight:600; font-size:20px; margin:0; color:#E4B65B;">Ouro Minas</h3>
+          </div>
+          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:15px;">
+            <sc-for list="{{ ouroFleet }}" as="item" hint-placeholder-count="5">
+              <li style="display:flex; align-items:flex-start; gap:11px; font-size:15px; color:#EDEDED; line-height:1.45; font-weight:500;"><span style="color:#E4B65B; flex:none; margin-top:1px;">✓</span> {{ item }}</li>
+            </sc-for>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" style="max-width:840px; margin:0 auto; padding:96px 28px;">
+    <div style="text-align:center; max-width:600px; margin:0 auto 48px;">
+      <p style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#B07D2A; margin:0 0 14px; font-weight:600;">FAQ</p>
+      <h2 style="font-family:'Inter Tight',sans-serif; font-weight:700; font-size:40px; letter-spacing:-0.025em; margin:0; line-height:1.1;">Perguntas frequentes</h2>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="5">
+        <div style="background:#fff; border:1px solid #E7E3DA; border-radius:14px; overflow:hidden; box-shadow:0 1px 2px #0000000a;">
+          <button onClick="{{ f.toggle }}" style="width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:22px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; font-family:'Inter Tight',sans-serif;">
+            <span style="font-size:16.5px; font-weight:600; color:#1A1A1A; letter-spacing:-0.01em;">{{ f.q }}</span>
+            <span style="flex:none; width:24px; height:24px; border-radius:50%; background:#F4F2ED; display:flex; align-items:center; justify-content:center; color:#B07D2A; font-size:18px; transition:transform .2s; transform:{{ f.rot }};">+</span>
+          </button>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:0 24px 22px; font-size:15px; color:#6B6B72; line-height:1.6; animation:fadeUp .25s ease;">{{ f.a }}</div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ CONTATO ============ -->
+  <section id="contato" style="background:#F4F2ED; border-top:1px solid #EAE7DF;">
+    <div style="max-width:1180px; margin:0 auto; padding:96px 28px;">
+      <div style="text-align:center; max-width:640px; margin:0 auto 56px;">
+        <p style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#B07D2A; margin:0 0 14px; font-weight:600;">Contato</p>
+        <h2 style="font-family:'Inter Tight',sans-serif; font-weight:700; font-size:40px; letter-spacing:-0.025em; margin:0 0 14px; line-height:1.1;">Solicite sua cotação</h2>
+        <p style="font-size:16.5px; color:#6B6B72; margin:0; line-height:1.6;">Preencha os dados e nossa equipe retorna com uma proposta personalizada.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start;">
+        <!-- FORM -->
+        <div style="background:#fff; border:1px solid #E7E3DA; border-radius:18px; padding:34px; box-shadow:0 4px 16px -8px #00000018;">
+          <div style="display:flex; flex-direction:column; gap:18px;">
+            <div>
+              <label style="display:block; font-size:13px; font-weight:600; color:#27272A; margin-bottom:7px;">Nome</label>
+              <input value="{{ form.name }}" onInput="{{ form.setName }}" placeholder="Seu nome" style="width:100%; font-family:'Inter',sans-serif; font-size:14.5px; color:#1A1A1A; padding:12px 14px; border:1px solid #DDD8CC; border-radius:9px; background:#FBFAF8; outline:none;">
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+              <div>
+                <label style="display:block; font-size:13px; font-weight:600; color:#27272A; margin-bottom:7px;">Empresa</label>
+                <input value="{{ form.company }}" onInput="{{ form.setCompany }}" placeholder="Sua empresa" style="width:100%; font-family:'Inter',sans-serif; font-size:14.5px; color:#1A1A1A; padding:12px 14px; border:1px solid #DDD8CC; border-radius:9px; background:#FBFAF8; outline:none;">
+              </div>
+              <div>
+                <label style="display:block; font-size:13px; font-weight:600; color:#27272A; margin-bottom:7px;">Telefone</label>
+                <input value="{{ form.phone }}" onInput="{{ form.setPhone }}" placeholder="(00) 00000-0000" style="width:100%; font-family:'Inter',sans-serif; font-size:14.5px; color:#1A1A1A; padding:12px 14px; border:1px solid #DDD8CC; border-radius:9px; background:#FBFAF8; outline:none;">
+              </div>
+            </div>
+            <div>
+              <label style="display:block; font-size:13px; font-weight:600; color:#27272A; margin-bottom:7px;">Quantos veículos?</label>
+              <input value="{{ form.qty }}" onInput="{{ form.setQty }}" placeholder="Ex.: 5 a 10 veículos" style="width:100%; font-family:'Inter',sans-serif; font-size:14.5px; color:#1A1A1A; padding:12px 14px; border:1px solid #DDD8CC; border-radius:9px; background:#FBFAF8; outline:none;">
+            </div>
+            <div>
+              <label style="display:block; font-size:13px; font-weight:600; color:#27272A; margin-bottom:7px;">Mensagem</label>
+              <textarea value="{{ form.msg }}" onInput="{{ form.setMsg }}" placeholder="Conte um pouco sobre a operação da sua empresa" rows="3" style="width:100%; font-family:'Inter',sans-serif; font-size:14.5px; color:#1A1A1A; padding:12px 14px; border:1px solid #DDD8CC; border-radius:9px; background:#FBFAF8; outline:none; resize:vertical;"></textarea>
+            </div>
+            <a href="{{ form.submitHref }}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; justify-content:center; gap:9px; background:#E4B65B; color:#1A1A1A; text-decoration:none; font-weight:600; font-size:15.5px; padding:15px 26px; border-radius:10px; transition:all .2s;" style-hover="display:inline-flex; align-items:center; justify-content:center; gap:9px; background:#eec272; color:#1A1A1A; text-decoration:none; font-weight:600; font-size:15.5px; padding:15px 26px; border-radius:10px; box-shadow:0 10px 28px -10px #E4B65B88;">
+              <span style="display:inline-flex; width:18px; height:18px;">{{ waIcon }}</span> Enviar cotação via WhatsApp
+            </a>
+            <p style="font-size:12px; color:#9c968a; margin:0; text-align:center;">Ao enviar, você é direcionado ao nosso WhatsApp com os dados preenchidos.</p>
+          </div>
+        </div>
+
+        <!-- INFO + MAPA -->
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div style="background:#fff; border:1px solid #E7E3DA; border-radius:18px; padding:30px; box-shadow:0 1px 3px #0000000a; display:flex; flex-direction:column; gap:20px;">
+            <div style="display:flex; align-items:flex-start; gap:14px;">
+              <div style="flex:none; width:38px; height:38px; border-radius:10px; background:#E4B65B1f; display:flex; align-items:center; justify-content:center; color:#B07D2A;"><span style="display:inline-flex; width:18px; height:18px;">{{ pinIcon }}</span></div>
+              <div>
+                <div style="font-size:13px; color:#9c968a; font-weight:500;">Endereço</div>
+                <div style="font-size:14.5px; color:#27272A; font-weight:500; margin-top:2px; line-height:1.5;">Av. do Contorno, 6594 — 17º andar<br>Lourdes · Belo Horizonte / MG</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:14px;">
+              <div style="flex:none; width:38px; height:38px; border-radius:10px; background:#E4B65B1f; display:flex; align-items:center; justify-content:center; color:#B07D2A;"><span style="display:inline-flex; width:18px; height:18px;">{{ mailIcon }}</span></div>
+              <div>
+                <div style="font-size:13px; color:#9c968a; font-weight:500;">E-mail</div>
+                <div style="font-size:14.5px; color:#27272A; font-weight:500; margin-top:2px;">contato@ourominasfrota.com.br</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:14px;">
+              <div style="flex:none; width:38px; height:38px; border-radius:10px; background:#E4B65B1f; display:flex; align-items:center; justify-content:center; color:#B07D2A;"><span style="display:inline-flex; width:18px; height:18px;">{{ waIcon }}</span></div>
+              <div>
+                <div style="font-size:13px; color:#9c968a; font-weight:500;">WhatsApp</div>
+                <a href="{{ whatsappHref }}" target="_blank" rel="noopener" style="font-size:14.5px; color:#B07D2A; font-weight:600; margin-top:2px; text-decoration:none; display:block;">Falar agora com um consultor →</a>
+              </div>
+            </div>
+          </div>
+          <div style="border-radius:18px; overflow:hidden; border:1px solid #E7E3DA; box-shadow:0 10px 30px -18px #00000033; min-height:240px; position:relative;">
+            <iframe title="Mapa Ouro Minas" src="https://www.google.com/maps?q=Av.+do+Contorno,+6594+-+Lourdes,+Belo+Horizonte+-+MG&output=embed" style="border:0; width:100%; height:100%; min-height:240px; display:block; filter:grayscale(0.15) contrast(1.02);" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:#161616;">
+    <div style="max-width:1180px; margin:0 auto; padding:56px 28px 36px;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:40px; flex-wrap:wrap; margin-bottom:40px;">
+        <div style="max-width:320px;">
+          <img src="assets/logo-ouro-minas-tagline.png" alt="Ouro Minas — Gestão de Frotas" style="height:68px; width:auto; display:block; margin-bottom:18px;">
+          <p style="font-size:13px; color:#8a8a92; line-height:1.7; margin:0;">Terceirização e gestão de frotas corporativas com atendimento nacional e sede em Belo Horizonte.</p>
+        </div>
+        <div style="display:flex; gap:12px; align-items:center;">
+          <a href="#" style="width:40px; height:40px; border-radius:10px; border:1px solid #2c2c2c; display:flex; align-items:center; justify-content:center; color:#a1a1aa; text-decoration:none;" style-hover="width:40px; height:40px; border-radius:10px; border:1px solid #E4B65B; display:flex; align-items:center; justify-content:center; color:#E4B65B; text-decoration:none;"><span style="display:inline-flex; width:18px; height:18px;">{{ igIcon }}</span></a>
+          <a href="#" style="width:40px; height:40px; border-radius:10px; border:1px solid #2c2c2c; display:flex; align-items:center; justify-content:center; color:#a1a1aa; text-decoration:none;" style-hover="width:40px; height:40px; border-radius:10px; border:1px solid #E4B65B; display:flex; align-items:center; justify-content:center; color:#E4B65B; text-decoration:none;"><span style="display:inline-flex; width:18px; height:18px;">{{ liIcon }}</span></a>
+          <a href="{{ whatsappHref }}" target="_blank" rel="noopener" style="width:40px; height:40px; border-radius:10px; border:1px solid #2c2c2c; display:flex; align-items:center; justify-content:center; color:#a1a1aa; text-decoration:none;" style-hover="width:40px; height:40px; border-radius:10px; border:1px solid #25D366; display:flex; align-items:center; justify-content:center; color:#25D366; text-decoration:none;"><span style="display:inline-flex; width:18px; height:18px;">{{ waIcon }}</span></a>
+        </div>
+      </div>
+      <div style="border-top:1px solid #272727; padding-top:26px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+        <p style="font-size:12px; color:#5f5f66; margin:0; line-height:1.7; max-width:760px;">Ouro Minas Locação de Veículos LTDA. CNPJ: 09.351.907/0001-70. Av. do Contorno, 6594 — 17º · Lourdes · Belo Horizonte / MG. Atendimento nacional. contato@ourominasfrota.com.br</p>
+        <p style="font-size:12px; color:#4a4a50; margin:0;">© 2026 Ouro Minas. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ BOTÃO FLUTUANTE WHATSAPP ============ -->
+  <a href="{{ whatsappHref }}" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" style="position:fixed; bottom:26px; right:26px; z-index:90; width:58px; height:58px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; color:#fff; text-decoration:none; animation:pulseWa 2.6s ease-in-out infinite;" style-hover="position:fixed; bottom:26px; right:26px; z-index:90; width:58px; height:58px; border-radius:50%; background:#1faf54; display:flex; align-items:center; justify-content:center; color:#fff; text-decoration:none; transform:scale(1.06);">
+    <span style="display:inline-flex; width:30px; height:30px;">{{ waIcon }}</span>
+  </a>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1180, &quot;height&quot;: 900 },
+  &quot;heroGrid&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Estilo&quot; }
+}">
+class Component extends DCLogic {
+  state = { open: 0 };
+
+  icon(paths) {
+    return React.createElement('svg', { viewBox: '0 0 24 24', width: '100%', height: '100%', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' }, paths);
+  }
+  iconFill(child) {
+    return React.createElement('svg', { viewBox: '0 0 24 24', width: '100%', height: '100%', fill: 'currentColor' }, child);
+  }
+  p(d) { return React.createElement('path', { d, key: d.slice(0, 8) }); }
+
+  renderVals() {
+    const R = React.createElement;
+    const baseMsg = 'Oi! Vim do site e gostaria de solicitar uma cotação de frota corporativa para minha empresa.';
+    const whatsappHref = 'https://wa.me/?text=' + encodeURIComponent(baseMsg);
+
+    // form state
+    const f = this.props && {};
+    const form = this.state.form || {};
+    const setF = (k) => (e) => this.setState(s => ({ form: { ...(s.form||{}), [k]: e.target.value } }));
+    const composed = `Olá! Gostaria de solicitar uma cotação de frota corporativa.%0A%0A` +
+      `Nome: ${form.name || '-'}%0A` +
+      `Empresa: ${form.company || '-'}%0A` +
+      `Telefone: ${form.phone || '-'}%0A` +
+      `Quantidade de veículos: ${form.qty || '-'}%0A` +
+      `Mensagem: ${form.msg || '-'}`;
+    const submitHref = 'https://wa.me/?text=' + composed;
+
+    const diferenciais = [
+      { title: 'Atendimento exclusivo para empresas', desc: 'Soluções B2B desenhadas para a realidade e o volume da sua operação corporativa.', icon: this.icon([this.p('M3 21h18'), this.p('M5 21V7l8-4v18'), this.p('M19 21V11l-6-4'), this.p('M9 9v.01'), this.p('M9 12v.01'), this.p('M9 15v.01')]) },
+      { title: 'Atendimento humanizado', desc: 'Um consultor dedicado acompanha sua conta de ponta a ponta, com agilidade real.', icon: this.icon([this.p('M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'), this.p('M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z'), this.p('M22 21v-2a4 4 0 0 0-3-3.87'), this.p('M16 3.13a4 4 0 0 1 0 7.75')]) },
+      { title: 'Frota constantemente renovada', desc: 'Veículos novos e revisados, reduzindo riscos de quebra e tempo ocioso.', icon: this.icon([this.p('M21 2v6h-6'), this.p('M3 12a9 9 0 0 1 15-6.7L21 8'), this.p('M3 22v-6h6'), this.p('M21 12a9 9 0 0 1-15 6.7L3 16')]) },
+      { title: 'Gestão completa da frota', desc: 'Documentação, IPVA, multas, manutenção e telemetria — tudo por nossa conta.', icon: this.icon([this.p('M9 11l3 3L22 4'), this.p('M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11')]) },
+      { title: 'Manutenção preventiva', desc: 'Planos por modelo que antecipam falhas e mantêm a operação sempre ativa.', icon: this.icon([this.p('M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.7 2.7-2-2 2.7-2.7z')]) },
+      { title: 'Assistência 24 horas', desc: 'Suporte e reposição de veículo a qualquer hora, em qualquer região do país.', icon: this.icon([this.p('M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z'), this.p('M12 6v6l4 2')]) },
+    ];
+
+    const steps = [
+      { n: '01', text: 'Entendemos a necessidade da sua empresa.' },
+      { n: '02', text: 'Definimos a frota ideal para sua operação.' },
+      { n: '03', text: 'Entregamos os veículos.' },
+      { n: '04', text: 'Fazemos toda a gestão da frota.' },
+    ];
+
+    const ownFleet = [
+      'Alto investimento inicial.',
+      'Custos com manutenção.',
+      'IPVA e documentação.',
+      'Custos imprevisíveis.',
+      'Tempo gasto com burocracias.',
+    ];
+    const ouroFleet = [
+      'Sem imobilizar capital.',
+      'Gestão completa inclusa.',
+      'Custos previsíveis.',
+      'Mais disponibilidade operacional.',
+      'Mais foco no crescimento da empresa.',
+    ];
+
+    const fleetRaw = [
+      { name: 'Fiat Mobi', cat: 'Compacto', versions: ['Mobi Like 1.0'] },
+      { name: 'Fiat Argo', cat: 'Hatch', versions: ['Argo 1.0', 'Argo Drive 1.0', 'Argo Drive 1.3 Automático', 'Argo Trekking 1.3'] },
+      { name: 'Fiat Cronos', cat: 'Sedan', versions: ['Cronos Drive 1.3 Automático'] },
+      { name: 'Volkswagen Gol', cat: 'Hatch', versions: ['Novo Gol 1.0 G7 TL MCV'] },
+      { name: 'Renault Kwid', cat: 'Compacto', versions: ['Kwid Zen'] },
+      { name: 'Chevrolet Onix', cat: 'Hatch', versions: ['Onix 1.0 MT'] },
+      { name: 'Volkswagen Polo', cat: 'Hatch', versions: ['Polo MPI 1.0', 'Polo CL TSI', 'Polo HL AD', 'Polo Track 1.0', 'Polo Track Rock in Rio', 'Polo TSI Manual'] },
+      { name: 'Chevrolet Montana', cat: 'Picape', versions: ['Montana LTZ'] },
+      { name: 'Volkswagen Saveiro', cat: 'Picape', versions: ['Saveiro CS RB MF', 'Saveiro Robust 1.6 16V CS'] },
+      { name: 'Chevrolet Spin', cat: 'Minivan', versions: ['Spin LTZ', 'Spin LT 7 Lugares'] },
+      { name: 'Fiat Strada', cat: 'Picape', versions: ['Strada Endurance 1.3 CS', 'Strada Freedom 1.3 CD'] },
+      { name: 'Volkswagen T-Cross', cat: 'SUV', versions: ['T-Cross TSI Automático'] },
+      { name: 'Toyota Yaris', cat: 'Hatch / Sedan', versions: ['Hatch XL 1.5 AT', 'Sedan XL 1.5 AT'] },
+      { name: 'Toyota Hilux', cat: 'Picape Diesel', versions: ['Hilux STD 2.8 Diesel Cabine Dupla'] },
+    ];
+    const fleet = fleetRaw.map(c => ({ ...c, countLabel: c.versions.length + (c.versions.length > 1 ? ' versões' : ' versão') }));
+
+    const faqData = [
+      { q: 'A Ouro Minas atende pessoa física?', a: 'Nosso foco é o atendimento corporativo (pessoa jurídica), com soluções de terceirização e gestão de frotas pensadas para empresas. Fale com a gente para avaliar o seu caso.' },
+      { q: 'Quais regiões do Brasil são atendidas?', a: 'Atendemos empresas em todo o território nacional, com sede em Belo Horizonte / MG e suporte logístico em diversas regiões do país.' },
+      { q: 'Como funciona a manutenção dos veículos?', a: 'A manutenção preventiva e corretiva é totalmente gerida por nós, com planos específicos por modelo e reposição de veículo para evitar tempo ocioso na sua operação.' },
+      { q: 'É possível personalizar a frota conforme a operação?', a: 'Sim. Montamos a composição de modelos, versões e quantidade de veículos de acordo com o perfil de uso e as rotas da sua empresa.' },
+      { q: 'Como solicitar uma cotação?', a: 'Basta preencher o formulário na seção de contato ou falar diretamente com um consultor pelo WhatsApp. Retornamos com uma proposta personalizada em poucos minutos.' },
+    ];
+    const faqs = faqData.map((f, i) => ({
+      q: f.q, a: f.a,
+      open: this.state.open === i,
+      rot: this.state.open === i ? 'rotate(45deg)' : 'rotate(0deg)',
+      toggle: () => this.setState(s => ({ open: s.open === i ? -1 : i })),
+    }));
+
+    // icons
+    const waIcon = this.iconFill(this.p('M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.78 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.02zM12.04 20.15h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z'));
+    const pinIcon = this.icon([this.p('M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'), this.p('M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z')]);
+    const mailIcon = this.icon([this.p('M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z'), this.p('M22 6l-10 7L2 6')]);
+    const xIcon = this.icon([this.p('M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z'), this.p('M15 9l-6 6'), this.p('M9 9l6 6')]);
+    const igIcon = this.icon([this.p('M16 4H8a4 4 0 0 0-4 4v8a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V8a4 4 0 0 0-4-4z'), this.p('M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z'), this.p('M17.5 6.5v.01')]);
+    const liIcon = this.icon([this.p('M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z'), this.p('M6 9H2v12h4z'), this.p('M4 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z')]);
+
+    return {
+      whatsappHref,
+      heroGrid: this.props.heroGrid ?? true,
+      diferenciais, steps, ownFleet, ouroFleet, fleet, faqs,
+      waIcon, pinIcon, mailIcon, xIcon, igIcon, liIcon,
+      form: {
+        name: form.name || '', company: form.company || '', phone: form.phone || '', qty: form.qty || '', msg: form.msg || '',
+        setName: setF('name'), setCompany: setF('company'), setPhone: setF('phone'), setQty: setF('qty'), setMsg: setF('msg'),
+        submitHref,
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
