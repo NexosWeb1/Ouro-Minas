@@ -13,7 +13,8 @@ const fleet = [
   { name: 'Chevrolet Onix', cat: 'Hatch', versions: ['Onix 1.0 MT'], img: 'assets/Onix.jpg' },
   { name: 'Chevrolet Spin', cat: 'Minivan', versions: ['Spin LTZ', 'Spin LT 7 Lugares'], img: 'assets/Spin.jpg' },
   { name: 'Chevrolet Montana', cat: 'Picape', versions: ['Montana LTZ'], img: 'assets/Montana.JPG' },
-  { name: 'Toyota Yaris', cat: 'Hatch / Sedan', versions: ['Hatch XL 1.5 AT', 'Sedan XL 1.5 AT'], img: 'assets/Yaris.jpg' },
+  { name: 'Toyota Yaris', cat: 'Hatch', versions: ['Hatch XL 1.5 AT'], img: 'assets/Yaris.jpg' },
+  { name: 'Toyota Yaris', cat: 'Sedan', versions: ['Sedan XL 1.5 AT'], img: 'assets/Yaris.jpg' },
   { name: 'Toyota Hilux', cat: 'Picape Diesel', versions: ['Hilux STD 2.8 Diesel Cabine Dupla'], img: 'assets/Hilux.jpg' },
 ];
 
@@ -25,29 +26,151 @@ const faqs = [
   { q: 'Como solicitar uma cotação?', a: 'Basta preencher o formulário na seção de contato ou falar diretamente com um consultor pelo WhatsApp. Retornamos com uma proposta personalizada em poucos minutos.' },
 ];
 
+let activeFleetCat = 'Todos';
+
+function fleetCategories() {
+  const cats = [];
+  fleet.forEach(car => { if (!cats.includes(car.cat)) cats.push(car.cat); });
+  return ['Todos', ...cats];
+}
+
+function fleetCardHTML(car) {
+  const label = car.versions.length + (car.versions.length > 1 ? ' versões' : ' versão');
+  const items = car.versions.map(v => `<li>${v}</li>`).join('');
+  const media = car.img
+    ? `<img src="${car.img}" alt="${car.name}" loading="lazy">`
+    : `<span class="fleet-ph">[ ${car.name} ]</span>`;
+  return `
+    <div class="fleet-card">
+      <div class="fleet-img">
+        <span class="fleet-cat">${car.cat}</span>
+        ${media}
+      </div>
+      <div class="fleet-body">
+        <h3>${car.name}</h3>
+        <p class="fleet-versions-label">${label}</p>
+        <ul class="fleet-versions">${items}</ul>
+      </div>
+    </div>`;
+}
+
+function renderFleetTrack() {
+  const track = document.getElementById('fleetTrack');
+  const viewport = document.getElementById('fleetViewport');
+  if (!track) return;
+  const cars = activeFleetCat === 'Todos' ? fleet : fleet.filter(car => car.cat === activeFleetCat);
+  track.innerHTML = cars.map(fleetCardHTML).join('');
+  if (viewport) viewport.scrollTo({ left: 0 });
+  updateFleetArrows();
+}
+
+function switchFleetCategory(cat) {
+  if (cat === activeFleetCat) return;
+  activeFleetCat = cat;
+
+  document.querySelectorAll('.fleet-tab').forEach(btn => {
+    const isActive = btn.dataset.cat === cat;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-selected', String(isActive));
+  });
+
+  const track = document.getElementById('fleetTrack');
+  if (!track) return;
+  track.classList.add('switching');
+  window.setTimeout(() => {
+    renderFleetTrack();
+    requestAnimationFrame(() => requestAnimationFrame(() => track.classList.remove('switching')));
+  }, 320);
+}
+
+function buildFleetTabs() {
+  const tabs = document.getElementById('fleetTabs');
+  if (!tabs) return;
+  tabs.innerHTML = fleetCategories().map((cat, i) => `
+    <button type="button" class="fleet-tab${i === 0 ? ' active' : ''}" data-cat="${cat}" role="tab" aria-selected="${i === 0}">${cat}</button>
+  `).join('');
+
+  tabs.addEventListener('click', e => {
+    const btn = e.target.closest('.fleet-tab');
+    if (!btn) return;
+    switchFleetCategory(btn.dataset.cat);
+  });
+}
+
+function updateFleetArrows() {
+  const viewport = document.getElementById('fleetViewport');
+  const prev = document.getElementById('fleetPrev');
+  const next = document.getElementById('fleetNext');
+  if (!viewport || !prev || !next) return;
+
+  const scrollable = viewport.scrollWidth > viewport.clientWidth + 4;
+  prev.hidden = !scrollable;
+  next.hidden = !scrollable;
+  if (!scrollable) return;
+
+  const max = viewport.scrollWidth - viewport.clientWidth - 1;
+  prev.disabled = viewport.scrollLeft <= 0;
+  next.disabled = viewport.scrollLeft >= max;
+}
+
+function buildFleetCarousel() {
+  const viewport = document.getElementById('fleetViewport');
+  const prev = document.getElementById('fleetPrev');
+  const next = document.getElementById('fleetNext');
+  if (!viewport) return;
+
+  const scrollByCards = dir => {
+    const card = viewport.querySelector('.fleet-card');
+    const step = card ? card.getBoundingClientRect().width + 24 : viewport.clientWidth * 0.8;
+    viewport.scrollBy({ left: step * dir, behavior: 'smooth' });
+  };
+
+  prev?.addEventListener('click', () => scrollByCards(-1));
+  next?.addEventListener('click', () => scrollByCards(1));
+  viewport.addEventListener('scroll', updateFleetArrows, { passive: true });
+  window.addEventListener('resize', updateFleetArrows);
+
+  // Mouse drag-to-scroll (touch swipe is handled natively by the browser)
+  let dragging = false;
+  let dragged = false;
+  let startX = 0;
+  let startScroll = 0;
+
+  viewport.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'touch') return;
+    dragging = true;
+    dragged = false;
+    startX = e.clientX;
+    startScroll = viewport.scrollLeft;
+    viewport.classList.add('dragging');
+    viewport.setPointerCapture(e.pointerId);
+  });
+
+  viewport.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 4) dragged = true;
+    viewport.scrollLeft = startScroll - dx;
+  });
+
+  const endDrag = () => {
+    dragging = false;
+    viewport.classList.remove('dragging');
+  };
+  viewport.addEventListener('pointerup', endDrag);
+  viewport.addEventListener('pointerleave', endDrag);
+  viewport.addEventListener('click', e => {
+    if (dragged) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, true);
+}
+
 function buildFleet() {
-  const grid = document.getElementById('fleetGrid');
-  if (!grid) return;
-  grid.innerHTML = fleet.map((car, i) => {
-    const label = car.versions.length + (car.versions.length > 1 ? ' versões' : ' versão');
-    const items = car.versions.map(v => `<li>${v}</li>`).join('');
-    const media = car.img
-      ? `<img src="${car.img}" alt="${car.name}" loading="lazy">`
-      : `<span class="fleet-ph">[ ${car.name} ]</span>`;
-    const delay = (i % 3) * 0.08;
-    return `
-      <div class="fleet-card reveal" style="transition-delay:${delay}s">
-        <div class="fleet-img">
-          <span class="fleet-cat">${car.cat}</span>
-          ${media}
-        </div>
-        <div class="fleet-body">
-          <h3>${car.name}</h3>
-          <p class="fleet-versions-label">${label}</p>
-          <ul class="fleet-versions">${items}</ul>
-        </div>
-      </div>`;
-  }).join('');
+  buildFleetTabs();
+  buildFleetCarousel();
+  renderFleetTrack();
 }
 
 function buildFaq() {

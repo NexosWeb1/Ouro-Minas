@@ -650,7 +650,9 @@ p {
 .fleet-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background: #fff;
+  padding: 14px;
   position: absolute;
   inset: 0;
 }
@@ -737,6 +739,125 @@ p {
 
 .fleet-note a:hover {
   text-decoration: underline;
+}
+
+/* ── FLEET TABS ── */
+.fleet-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.fleet-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.fleet-tab {
+  flex: 0 0 auto;
+  appearance: none;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 12px 18px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color .2s, border-color .2s;
+}
+
+.fleet-tab:hover {
+  color: #1A1A1A;
+}
+
+.fleet-tab.active {
+  color: var(--gold-dark);
+  border-bottom-color: var(--gold);
+}
+
+/* ── FLEET CAROUSEL ── */
+.fleet-carousel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fleet-track-viewport {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: grab;
+}
+
+.fleet-track-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.fleet-track-viewport.dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+.fleet-track {
+  display: flex;
+  gap: 24px;
+  padding: 4px 4px 14px;
+  transition: opacity .32s cubic-bezier(.16, .8, .3, 1), transform .32s cubic-bezier(.16, .8, .3, 1);
+}
+
+.fleet-track.switching {
+  opacity: 0;
+  transform: translateX(14px) scale(.98);
+}
+
+.fleet-carousel .fleet-card {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+}
+
+.fleet-arrow {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: #1A1A1A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color .2s, background .2s, color .2s, opacity .2s;
+}
+
+.fleet-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+.fleet-arrow:hover:not(:disabled) {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--dark);
+}
+
+.fleet-arrow:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+.fleet-arrow[hidden] {
+  display: none;
 }
 
 /* ── HERO WITH STRIP fullscreen ── */
@@ -1420,6 +1541,26 @@ p {
     grid-template-columns: 1fr 1fr;
   }
 
+  .fleet-carousel {
+    gap: 8px;
+  }
+
+  .fleet-carousel .fleet-card {
+    flex-basis: 84%;
+    min-width: 0;
+    max-width: 84%;
+  }
+
+  .fleet-arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .fleet-arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
   .compare-grid {
     grid-template-columns: 1fr;
   }
@@ -1448,5 +1589,10 @@ p {
 
   h2 {
     font-size: 28px;
+  }
+
+  .fleet-carousel .fleet-card {
+    flex-basis: 88%;
+    max-width: 88%;
   }
 }

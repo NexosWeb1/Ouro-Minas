@@ -190,7 +190,24 @@
         <p class="section-sub">Frota constantemente renovada. Veja alguns dos modelos e versões disponíveis para
           terceirização.</p>
       </div>
-      <div class="grid-3 fleet-grid" id="fleetGrid"></div>
+      <div class="fleet-tabs" id="fleetTabs" role="tablist" aria-label="Categorias de veículos"></div>
+      <div class="fleet-carousel reveal">
+        <button type="button" class="fleet-arrow fleet-arrow-prev" id="fleetPrev" aria-label="Ver veículos anteriores">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <div class="fleet-track-viewport" id="fleetViewport">
+          <div class="fleet-track" id="fleetTrack"></div>
+        </div>
+        <button type="button" class="fleet-arrow fleet-arrow-next" id="fleetNext" aria-label="Ver mais veículos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+      </div>
       <p class="fleet-note">Não encontrou o modelo ideal? <a
           href="https://wa.me/5531000000000?text=Ol%C3%A1%21+Gostaria+de+mais+informa%C3%A7%C3%B5es+sobre+a+frota."
           target="_blank" rel="noopener">Fale conosco</a> — montamos a frota sob medida.</p>
