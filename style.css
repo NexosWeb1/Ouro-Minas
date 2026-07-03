@@ -51,6 +51,17 @@ h1 {
   letter-spacing: -0.03em;
 }
 
+.hero h1 {
+  font-size: clamp(38px, 4.6vw, 68px);
+}
+
+.hero h1 .text-gold {
+  background: linear-gradient(135deg, #fff 0%, #fff 35%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 h2 {
   font-size: clamp(28px, 3.5vw, 40px);
   font-weight: 700;
@@ -306,11 +317,18 @@ p {
   .hero-content .hero-sub,
   .hero-content .hero-actions,
   .hero-glow,
-  .hero-img {
+  .hero-img,
+  .hero-side,
+  .hero-marquee-track {
     transition: none !important;
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  .hero-tag-ping-ripple {
+    animation: none !important;
+    display: none !important;
   }
 }
 
@@ -442,12 +460,17 @@ p {
   width: 100%;
   margin: 0 auto;
   padding: 96px var(--px) 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
 }
 
 .hero-content {
   position: relative;
   z-index: 4;
-  max-width: 620px;
+  flex: 1 1 480px;
+  max-width: 580px;
 }
 
 @keyframes heroFadeUp {
@@ -483,6 +506,279 @@ p {
 
 .hero-content .hero-actions {
   animation-delay: .48s;
+}
+
+.hero-side {
+  position: relative;
+  z-index: 5;
+  flex: 0 0 auto;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  opacity: 0;
+  animation: heroFadeUp .85s cubic-bezier(.16, .8, .3, 1) .55s both;
+}
+
+.hero-stats-card,
+.hero-marquee-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .1);
+  background: rgba(255, 255, 255, .05);
+  border-radius: 22px;
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 24px 48px -20px #000000b3;
+}
+
+.hero-stats-card {
+  padding: 26px;
+}
+
+.hero-stats-glow {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: #E4B65B26;
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.hero-stats-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.hero-stats-icon {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .15);
+  color: #fff;
+}
+
+.hero-stats-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.hero-stats-value {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.hero-stats-label {
+  font-size: 13px;
+  color: #A8A6A0;
+}
+
+.hero-progress {
+  position: relative;
+  margin-bottom: 22px;
+}
+
+.hero-progress-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #A8A6A0;
+  margin-bottom: 9px;
+}
+
+.hero-progress-value {
+  color: #fff;
+  font-weight: 600;
+}
+
+.hero-progress-track {
+  height: 7px;
+  width: 100%;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .1);
+  overflow: hidden;
+}
+
+.hero-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+}
+
+.hero-stats-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, .1);
+  margin-bottom: 20px;
+}
+
+.hero-mini-stats {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 22px;
+}
+
+.hero-mini-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 3px;
+  padding: 0 4px;
+  border-left: 1px solid rgba(255, 255, 255, .1);
+}
+
+.hero-mini-stat:first-child {
+  border-left: none;
+}
+
+.hero-mini-value {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.hero-mini-label {
+  font-size: 10.5px;
+  letter-spacing: 0.03em;
+  color: #A8A6A0;
+}
+
+.hero-tags {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  background: rgba(255, 255, 255, .05);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #D6D4CE;
+}
+
+.hero-tag-icon {
+  width: 11px;
+  height: 11px;
+  color: var(--gold);
+}
+
+.hero-tag-ping {
+  position: relative;
+  display: inline-flex;
+  width: 8px;
+  height: 8px;
+}
+
+.hero-tag-ping-dot {
+  position: relative;
+  display: inline-flex;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+.hero-tag-ping-ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #22c55e;
+  opacity: .75;
+  animation: heroPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes heroPing {
+  75%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.hero-marquee-card {
+  padding: 24px 0;
+}
+
+.hero-marquee-card h3 {
+  margin: 0 0 18px;
+  padding: 0 24px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #A8A6A0;
+}
+
+.hero-marquee-mask {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+}
+
+.hero-marquee-track {
+  display: flex;
+  gap: 32px;
+  width: max-content;
+  padding: 0 16px;
+  animation: heroMarquee 22s linear infinite;
+}
+
+.hero-brand-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  opacity: .55;
+  transition: opacity .2s;
+}
+
+.hero-brand-item:hover {
+  opacity: 1;
+}
+
+.hero-brand-dot {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+@keyframes heroMarquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-33.333%);
+  }
 }
 
 .badge {
@@ -553,6 +849,7 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 42%;
   display: block;
   animation: heroKenBurns 20s ease-in-out infinite alternate;
 }
@@ -563,7 +860,7 @@ p {
   }
 
   to {
-    transform: scale(1.06);
+    transform: scale(1.02);
   }
 }
 
@@ -681,13 +978,19 @@ p {
   padding: 18px 20px 22px;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  /* Fixed floor for the closed state (title + label + first version row) so
+     every card lines up exactly, independent of font-metric/render nuances
+     between cards — the open accordion still grows past this freely. */
+  min-height: 128px;
 }
 
 .fleet-body h3 {
   font-size: 17px;
   margin-bottom: 4px;
   color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .fleet-versions-label {
@@ -708,6 +1011,56 @@ p {
   gap: 7px;
 }
 
+.fleet-versions-toggle {
+  appearance: none;
+  background: none;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 5px;
+  margin: 0 0 0 auto;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--gold);
+  transition: color .2s;
+}
+
+.fleet-versions-toggle:hover {
+  color: var(--gold-hover);
+}
+
+.fleet-versions-chevron {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  transition: transform .25s ease;
+}
+
+.fleet-versions-toggle[aria-expanded="true"] .fleet-versions-chevron {
+  transform: rotate(180deg);
+}
+
+.fleet-versions-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .3s ease;
+}
+
+.fleet-versions-collapse.open {
+  grid-template-rows: 1fr;
+}
+
+.fleet-versions-collapse .fleet-versions {
+  overflow: hidden;
+  min-height: 0;
+  padding-top: 10px;
+}
+
 .fleet-versions li {
   display: flex;
   align-items: flex-start;
@@ -722,6 +1075,18 @@ p {
   color: var(--gold);
   flex-shrink: 0;
   margin-top: 1px;
+}
+
+.fleet-versions li.fleet-versions-first {
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.fleet-versions-first-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .fleet-note {
@@ -810,6 +1175,7 @@ p {
 
 .fleet-track {
   display: flex;
+  align-items: flex-start;
   gap: 24px;
   padding: 4px 4px 14px;
   transition: opacity .32s cubic-bezier(.16, .8, .3, 1), transform .32s cubic-bezier(.16, .8, .3, 1);
@@ -862,14 +1228,17 @@ p {
 
 /* ── HERO WITH STRIP fullscreen ── */
 .hero-with-strip {
-  min-height: calc(100vh - 68px);
-  min-height: calc(100dvh - 68px);
   display: flex;
   flex-direction: column;
 }
 
 .hero-with-strip .hero {
-  flex: 1;
+  /* min-height (a floor), not flex:1 filling a fixed-height parent — a flex
+     item with overflow:hidden ignores its content's automatic min size, so
+     content taller than the viewport (e.g. the stacked mobile hero-side
+     cards) was getting clipped instead of growing the section. */
+  min-height: calc(100vh - 68px);
+  min-height: calc(100dvh - 68px);
 }
 
 /* ── STEPS ── */
@@ -1466,11 +1835,16 @@ p {
     margin-top: 0;
   }
 
+  .tl-step:nth-child(even) {
+    margin-top: 0;
+  }
+
   .tl-step:not(:last-child)::after {
     top: 72px;
+    bottom: 0;
     left: 36px;
     width: 2px;
-    height: calc(100% - 72px);
+    height: auto;
     border-top: none;
     background: linear-gradient(180deg, var(--gold-dark), var(--gold));
   }
@@ -1520,11 +1894,18 @@ p {
   }
 
   .hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 36px;
     padding: 64px var(--px) 72px;
   }
 
   .hero-content {
     max-width: 100%;
+  }
+
+  .hero-side {
+    width: 100%;
   }
 
   .hero-scrim {

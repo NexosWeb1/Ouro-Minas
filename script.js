@@ -34,12 +34,49 @@ function fleetCategories() {
   return ['Todos', ...cats];
 }
 
-function fleetCardHTML(car) {
-  const label = car.versions.length + (car.versions.length > 1 ? ' versões' : ' versão');
-  const items = car.versions.map(v => `<li>${v}</li>`).join('');
+function fleetBrands() {
+  const brands = [];
+  fleet.forEach(car => {
+    const brand = car.name.split(' ')[0];
+    if (!brands.includes(brand)) brands.push(brand);
+  });
+  return brands;
+}
+
+function buildHeroBrandsMarquee() {
+  const track = document.getElementById('heroBrandsTrack');
+  if (!track) return;
+  const brands = fleetBrands();
+  const looped = [...brands, ...brands, ...brands];
+  track.innerHTML = looped.map(brand => `
+    <div class="hero-brand-item">
+      <span class="hero-brand-dot"></span>
+      <span>${brand}</span>
+    </div>`).join('');
+}
+
+function fleetCardHTML(car, i) {
+  const count = car.versions.length;
+  const label = count + (count > 1 ? ' versões' : ' versão');
+  const [first, ...rest] = car.versions;
   const media = car.img
     ? `<img src="${car.img}" alt="${car.name}" loading="lazy">`
     : `<span class="fleet-ph">[ ${car.name} ]</span>`;
+
+  const toggle = rest.length ? `
+          <button type="button" class="fleet-versions-toggle" aria-expanded="false" aria-controls="fleet-versions-${i}">
+            <span>+${rest.length} mais</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="fleet-versions-chevron">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>` : '';
+
+  const collapse = rest.length ? `
+        <div class="fleet-versions-collapse" id="fleet-versions-${i}">
+          <ul class="fleet-versions">${rest.map(v => `<li>${v}</li>`).join('')}</ul>
+        </div>` : '';
+
   return `
     <div class="fleet-card">
       <div class="fleet-img">
@@ -47,9 +84,13 @@ function fleetCardHTML(car) {
         ${media}
       </div>
       <div class="fleet-body">
-        <h3>${car.name}</h3>
+        <h3 title="${car.name}">${car.name}</h3>
         <p class="fleet-versions-label">${label}</p>
-        <ul class="fleet-versions">${items}</ul>
+        <ul class="fleet-versions">
+          <li class="fleet-versions-first">
+            <span class="fleet-versions-first-text" title="${first}">${first}</span>${toggle}
+          </li>
+        </ul>${collapse}
       </div>
     </div>`;
 }
@@ -142,20 +183,28 @@ function buildFleetCarousel() {
     dragged = false;
     startX = e.clientX;
     startScroll = viewport.scrollLeft;
-    viewport.classList.add('dragging');
-    viewport.setPointerCapture(e.pointerId);
   });
 
   viewport.addEventListener('pointermove', e => {
     if (!dragging) return;
     const dx = e.clientX - startX;
-    if (Math.abs(dx) > 4) dragged = true;
-    viewport.scrollLeft = startScroll - dx;
+    if (!dragged && Math.abs(dx) > 4) {
+      // Only take pointer capture once an actual drag starts — capturing on
+      // every click retargets the click event to `viewport`, breaking
+      // clicks on buttons inside the cards (e.g. the versions toggle).
+      dragged = true;
+      viewport.classList.add('dragging');
+      viewport.setPointerCapture(e.pointerId);
+    }
+    if (dragged) viewport.scrollLeft = startScroll - dx;
   });
 
-  const endDrag = () => {
+  const endDrag = e => {
     dragging = false;
     viewport.classList.remove('dragging');
+    if (dragged && e?.pointerId != null && viewport.hasPointerCapture(e.pointerId)) {
+      viewport.releasePointerCapture(e.pointerId);
+    }
   };
   viewport.addEventListener('pointerup', endDrag);
   viewport.addEventListener('pointerleave', endDrag);
@@ -167,9 +216,24 @@ function buildFleetCarousel() {
   }, true);
 }
 
+function buildFleetVersionsToggle() {
+  const track = document.getElementById('fleetTrack');
+  if (!track) return;
+  track.addEventListener('click', e => {
+    const btn = e.target.closest('.fleet-versions-toggle');
+    if (!btn) return;
+    const collapse = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!collapse) return;
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    collapse.classList.toggle('open', !isOpen);
+  });
+}
+
 function buildFleet() {
   buildFleetTabs();
   buildFleetCarousel();
+  buildFleetVersionsToggle();
   renderFleetTrack();
 }
 
@@ -255,5 +319,6 @@ document.addEventListener('DOMContentLoaded', () => {
   buildFaq();
   buildContactForm();
   buildNav();
+  buildHeroBrandsMarquee();
   initScrollReveal();
 });
