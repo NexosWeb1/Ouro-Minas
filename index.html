@@ -39,12 +39,14 @@
   </header>
 
   <div id="hero">
-    <div class="hero-with-strip">
       <!-- HERO -->
       <section class="hero">
         <div class="hero-img-box">
-          <img src="assets/Chave Mão.JPG" alt="Frota Ouro Minas" class="hero-img"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <picture>
+            <source media="(min-width: 769px)" srcset="assets/CHAVE%20HORIZONTAL.jpg.jpeg">
+            <img src="assets/Chave Mão.JPG" alt="Frota Ouro Minas" class="hero-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          </picture>
           <div class="hero-placeholder"><span>[ imagem / vídeo institucional da frota ]</span></div>
         </div>
         <div class="hero-grid-bg"></div>
@@ -143,22 +145,20 @@
             </div>
           </div>
         </div>
-      </section>
 
-      <!-- FAIXA INSTITUCIONAL -->
-      <section class="strip-dark">
-        <div class="strip-inner">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round" class="strip-icon">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-            <path d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-          </svg>
-          <p>Atendemos empresas em <span class="text-gold">todo o Brasil</span> com soluções completas em gestão de
-            frotas
-            e locação de veículos corporativos.</p>
+        <!-- FAIXA INSTITUCIONAL -->
+        <div class="hero-strip">
+          <div class="strip-inner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" class="strip-icon">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <path d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+            </svg>
+            <p>Atendemos empresas em <span class="text-gold">todo o Brasil</span> com soluções completas em gestão de
+              frotas e locação de veículos corporativos.</p>
+          </div>
         </div>
       </section>
-    </div><!-- /.hero-with-strip -->
   </div>
 
   <!-- DIFERENCIAIS -->
