@@ -14,7 +14,7 @@ const fleet = [
   { name: 'Chevrolet Spin', cat: 'Minivan', versions: ['Spin LTZ', 'Spin LT 7 Lugares'], img: 'assets/Spin.jpg' },
   { name: 'Chevrolet Montana', cat: 'Picape', versions: ['Montana LTZ'], img: 'assets/Montana.JPG' },
   { name: 'Toyota Yaris', cat: 'Hatch', versions: ['Hatch XL 1.5 AT'], img: 'assets/Yaris.jpg' },
-  { name: 'Toyota Yaris', cat: 'Sedan', versions: ['Sedan XL 1.5 AT'], img: 'assets/Yaris.jpg' },
+  { name: 'Toyota Yaris', cat: 'Sedan', versions: ['Sedan XL 1.5 AT'], img: 'assets/Yaris Sedan.jpg.jpeg' },
   { name: 'Toyota Hilux', cat: 'Picape Diesel', versions: ['Hilux STD 2.8 Diesel Cabine Dupla'], img: 'assets/Hilux.jpg' },
 ];
 
