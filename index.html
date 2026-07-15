@@ -464,9 +464,16 @@
                   <path d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                 </svg>
               </div>
-              <div>
+              <div class="address-list">
                 <div class="info-label">Endereço</div>
-                <div class="info-value">Av. do Contorno, 6594 — 17º andar<br>Lourdes · Belo Horizonte / MG</div>
+                <button type="button" class="address-item is-active"
+                  data-map="Av.+do+Contorno,+6594+-+Lourdes,+Belo+Horizonte+-+MG">
+                  Av. do Contorno, 6594 — 17º andar<br>Lourdes · Belo Horizonte / MG
+                </button>
+                <button type="button" class="address-item"
+                  data-map="Rua+Nossa+Senhora+Do+Carmo,+90+-+Pimentas,+Betim+-+MG">
+                  Rua Nossa Senhora do Carmo, 90<br>Pimentas · Betim / MG
+                </button>
               </div>
             </div>
             <div class="info-row">
@@ -497,7 +504,7 @@
             </div>
           </div>
           <div class="map-wrap">
-            <iframe title="Mapa Ouro Minas"
+            <iframe id="mapFrame" title="Mapa Ouro Minas"
               src="https://www.google.com/maps?q=Av.+do+Contorno,+6594+-+Lourdes,+Belo+Horizonte+-+MG&output=embed"
               loading="lazy" referrerpolicy="no-referrer-when-downgrade">
             </iframe>

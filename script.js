@@ -5,6 +5,7 @@ const fleet = [
   { name: 'Fiat Argo', cat: 'Hatch', versions: ['Argo 1.0', 'Argo Drive 1.0', 'Argo Drive 1.3 Automático', 'Argo Trekking 1.3'], img: 'assets/Argo.jpg' },
   { name: 'Fiat Cronos', cat: 'Sedan', versions: ['Cronos Drive 1.3 Automático'], img: 'assets/Cronos.jpg' },
   { name: 'Fiat Strada', cat: 'Picape', versions: ['Strada Endurance 1.3 CS', 'Strada Freedom 1.3 CD'], img: 'assets/Strada.jpg' },
+  { name: 'Fiat Fiorino', cat: 'Minivan', versions: ['Fiat Fiorino Endurance 1.3'], img: 'assets/Fiorino.jpg' },
   { name: 'Volkswagen Polo', cat: 'Hatch', versions: ['Polo MPI 1.0', 'Polo CL TSI', 'Polo HL AD', 'Polo Track 1.0', 'Polo Track Rock in Rio', 'Polo TSI Manual'], img: 'assets/Polo.jpg' },
   { name: 'Volkswagen Saveiro', cat: 'Picape', versions: ['Saveiro CS RB MF', 'Saveiro Robust 1.6 16V CS'], img: 'assets/Saveiro.jpg' },
   { name: 'Volkswagen T-Cross', cat: 'SUV', versions: ['T-Cross TSI Automático'], img: 'assets/T-Cross.jpg' },
@@ -303,6 +304,22 @@ function buildContactForm() {
   });
 }
 
+function buildAddressMap() {
+  const items = document.querySelectorAll('.address-item');
+  const mapFrame = document.getElementById('mapFrame');
+  if (!items.length || !mapFrame) return;
+
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      const query = item.dataset.map;
+      if (!query) return;
+      mapFrame.src = `https://www.google.com/maps?q=${query}&output=embed`;
+      items.forEach(i => i.classList.remove('is-active'));
+      item.classList.add('is-active');
+    });
+  });
+}
+
 function buildNav() {
   const toggle = document.getElementById('navToggle');
   const links = document.getElementById('navLinks');
@@ -338,6 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
   buildFleet();
   buildFaq();
   buildContactForm();
+  buildAddressMap();
   buildNav();
   buildHeroBrandsMarquee();
   initScrollReveal();
