@@ -1,12 +1,10 @@
-const WA_NUMBER = '5531000000000';
+const WA_NUMBER = '553125716005';
 
 const fleet = [
   { name: 'Fiat Mobi', cat: 'Compacto', versions: ['Mobi Like 1.0'], img: 'assets/Mobi.jpg' },
   { name: 'Fiat Argo', cat: 'Hatch', versions: ['Argo 1.0', 'Argo Drive 1.0', 'Argo Drive 1.3 Automático', 'Argo Trekking 1.3'], img: 'assets/Argo.jpg' },
   { name: 'Fiat Cronos', cat: 'Sedan', versions: ['Cronos Drive 1.3 Automático'], img: 'assets/Cronos.jpg' },
   { name: 'Fiat Strada', cat: 'Picape', versions: ['Strada Endurance 1.3 CS', 'Strada Freedom 1.3 CD'], img: 'assets/Strada.jpg' },
-  { name: 'Renault Kwid', cat: 'Compacto', versions: ['Kwid Zen'], img: 'assets/Kwid.jpg' },
-  { name: 'Volkswagen Gol', cat: 'Hatch', versions: ['Novo Gol 1.0 G7 TL MCV'], img: 'assets/Gol.jpg' },
   { name: 'Volkswagen Polo', cat: 'Hatch', versions: ['Polo MPI 1.0', 'Polo CL TSI', 'Polo HL AD', 'Polo Track 1.0', 'Polo Track Rock in Rio', 'Polo TSI Manual'], img: 'assets/Polo.jpg' },
   { name: 'Volkswagen Saveiro', cat: 'Picape', versions: ['Saveiro CS RB MF', 'Saveiro Robust 1.6 16V CS'], img: 'assets/Saveiro.jpg' },
   { name: 'Volkswagen T-Cross', cat: 'SUV', versions: ['T-Cross TSI Automático'], img: 'assets/T-Cross.jpg' },
@@ -269,8 +267,30 @@ function buildFaq() {
   });
 }
 
+function formatPhone(value) {
+  const digits = value.replace(/\D/g, '').slice(0, 11);
+  const ddd = digits.slice(0, 2);
+  const rest = digits.slice(2);
+  if (!ddd) return '';
+  if (!rest) return `(${ddd}`;
+  if (digits.length <= 10) {
+    const part1 = rest.slice(0, 4);
+    const part2 = rest.slice(4);
+    return part2 ? `(${ddd}) ${part1}-${part2}` : `(${ddd}) ${part1}`;
+  }
+  const part1 = rest.slice(0, 5);
+  const part2 = rest.slice(5);
+  return part2 ? `(${ddd}) ${part1}-${part2}` : `(${ddd}) ${part1}`;
+}
+
 function buildContactForm() {
   const btn = document.getElementById('submitBtn');
+  const phoneInput = document.getElementById('fphone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', () => {
+      phoneInput.value = formatPhone(phoneInput.value);
+    });
+  }
   if (!btn) return;
   btn.addEventListener('click', () => {
     const name = document.getElementById('fname').value.trim();
@@ -278,7 +298,7 @@ function buildContactForm() {
     const phone = document.getElementById('fphone').value.trim();
     const qty = document.getElementById('fqty').value.trim();
     const msg = document.getElementById('fmsg').value.trim();
-    const text = `Olá! Gostaria de solicitar uma cotação de frota corporativa.\n\nNome: ${name || '-'}\nEmpresa: ${company || '-'}\nTelefone: ${phone || '-'}\nQuantidade de veículos: ${qty || '-'}\nMensagem: ${msg || '-'}`;
+    const text = `Olá! Gostaria de solicitar uma cotação de frota corporativa.\n\nNome: ${name || '-'}\nEmpresa: ${company || '-'}\nTelefone: ${phone || '-'}\nQuantidade de veículos: ${qty || '-'}${msg ? `\n\n${msg}` : ''}`;
     window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
   });
 }
