@@ -42,16 +42,28 @@ function fleetBrands() {
   return brands;
 }
 
+const BRAND_LOGOS = {
+  Fiat: 'assets/marcas/fiat.png',
+  Volkswagen: 'assets/marcas/volkswagen.png',
+  Chevrolet: 'assets/marcas/chevrolet.png',
+  Toyota: 'assets/marcas/toyota.png',
+};
+
 function buildHeroBrandsMarquee() {
   const track = document.getElementById('heroBrandsTrack');
   if (!track) return;
   const brands = fleetBrands();
-  const looped = [...brands, ...brands, ...brands];
-  track.innerHTML = looped.map(brand => `
-    <div class="hero-brand-item">
-      <span class="hero-brand-dot"></span>
-      <span>${brand}</span>
-    </div>`).join('');
+  const unit = brands.map(brand => {
+    const logo = BRAND_LOGOS[brand];
+    const inner = logo
+      ? `<img class="hero-brand-logo" src="${logo}" alt="${brand}" loading="lazy">`
+      : `<span>${brand}</span>`;
+    return `
+      <div class="hero-brand-item">${inner}</div>
+      <span class="hero-brand-sep" aria-hidden="true"></span>`;
+  }).join('');
+  // Two identical copies => a -50% translate loops perfectly seamlessly.
+  track.innerHTML = unit + unit;
 }
 
 function fleetCardHTML(car, i) {

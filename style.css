@@ -743,27 +743,44 @@ p {
 
 .hero-marquee-track {
   display: flex;
-  gap: 32px;
+  align-items: center;
   width: max-content;
-  padding: 0 16px;
-  animation: heroMarquee 22s linear infinite;
+  animation: heroMarquee 34s linear infinite;
 }
 
 .hero-brand-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-family: 'Inter Tight', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: #fff;
-  white-space: nowrap;
+  flex-shrink: 0;
   opacity: .55;
-  transition: opacity .2s;
 }
 
+/* No opacity transition: while the track keeps moving, a fade would trail
+   behind the cursor and appear to light up the neighbouring logo. Snapping
+   instantly means only the logo actually under the cursor brightens. */
 .hero-brand-item:hover {
   opacity: 1;
+}
+
+.hero-brand-logo {
+  height: 44px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .35));
+}
+
+/* White dot separator between brands. Horizontal margin sets the spacing,
+   and being part of every unit keeps the -50% loop perfectly even. */
+.hero-brand-sep {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  margin: 0 26px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: .55;
 }
 
 .hero-brand-dot {
@@ -780,7 +797,7 @@ p {
   }
 
   to {
-    transform: translateX(-33.333%);
+    transform: translateX(-50%);
   }
 }
 

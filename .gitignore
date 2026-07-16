@@ -1,0 +1,32 @@
+# Ambiente / segredos
+.env
+.env.*
+!.env.example
+*.local
+
+# Chaves e credenciais
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+credentials*.json
+service-account*.json
+*secret*.json
+
+# Logs e bancos locais
+*.log
+*.sqlite
+*.db
+
+# Dependências / build
+node_modules/
+dist/
+build/
+
+# Config local de agentes / editor / SO
+.claude/
+.agents/
+.vercel/
+.DS_Store
+Thumbs.db
